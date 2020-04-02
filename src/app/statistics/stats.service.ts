@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IStat } from './stats-list';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators'
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 
 @Injectable({
@@ -17,12 +17,22 @@ export class StatsService{
         headers: new HttpHeaders({
             'x-rapidapi-host': 'covid-193.p.rapidapi.com',
             'x-rapidapi-key': 'web1w1qieRmsh58fAr8gv78fYyU1p1xqQMcjsnMBBMaxyqmh4C'
-        })
+        }),
+        params: new HttpParams({})
     };
     countriesURL = 'https://covid-193.p.rapidapi.com/statistics';
 
-    getAllCountryStats(): Observable<IStat[]> {
-        return this.http.get<IStat[]>(this.countriesURL, this.httpOptions).pipe(
+    getAllCountryStats(): Observable<IStat> {
+        return this.http.get<IStat>(this.countriesURL, this.httpOptions).pipe(
+            catchError(this.handleError)
+        );
+    }
+
+    getStatsByCountryName(country: string): Observable<IStat> {
+    //   const params = new HttpParams()
+    //         .set('country', country);
+      this.httpOptions.params.append('country', country);
+      return this.http.get<IStat>(this.countriesURL, this.httpOptions).pipe(
             catchError(this.handleError)
         );
     }
@@ -41,5 +51,5 @@ export class StatsService{
         // return an observable with a user-facing error message
         return throwError(
           'Something bad happened; please try again later.');
-      };
+      }
 }
