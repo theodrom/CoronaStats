@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "CoronaStats": {
+    "corona-stats": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/CoronaStats",
+            "outputPath": "dist/corona-stats",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -66,18 +67,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "CoronaStats:build"
+            "browserTarget": "corona-stats:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "CoronaStats:build:production"
+              "browserTarget": "corona-stats:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CoronaStats:build"
+            "browserTarget": "corona-stats:build"
           }
         },
         "test": {
@@ -114,15 +115,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "CoronaStats:serve"
+            "devServerTarget": "corona-stats:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "CoronaStats:serve:production"
+              "devServerTarget": "corona-stats:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "CoronaStats"
+    }
+  },
+  "defaultProject": "corona-stats",
+  "cli": {
+    "analytics": "b22e09f0-8d7d-4be8-845b-71d696050e8b"
+  }
 }

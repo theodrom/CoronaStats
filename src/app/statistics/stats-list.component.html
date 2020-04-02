@@ -1,0 +1,45 @@
+
+<div class="row-1" *ngIf='corStats'>
+  Date: {{ corStats.results }}
+  <ul class="card list-group list-group-flush ul-wrapper" *ngFor='let stat of corStats.response'>
+
+    <li class="list-group-item">
+      <h2>{{stat.country}}</h2>
+      <ul class="ul-nested">
+
+        <li class="li-data-row list-group-item">
+          <span>Total: </span> <span>{{stat.cases.total}}</span>
+        </li>
+        <li class="li-data-row list-group-item">
+          <span>New: </span> <span>{{stat.cases.new}}</span>
+        </li>
+
+        <ul class="ul-nested">
+          <li class="li-data-row list-group-item">
+            <span>Active: </span> <span>{{stat.cases.active}}</span>
+          </li>
+          <li class="li-data-row list-group-item">
+            <span>Critical: </span> <span>{{stat.cases.critical}}</span>
+          </li>
+          <li class="li-data-row list-group-item">
+            <span>Recovered: </span> <span>{{stat.cases.recovered}}</span>
+          </li>
+        </ul>
+
+      </ul>
+    </li>
+    <li class="list-group-item">
+      <h5>Deaths</h5>
+      <ul class="ul-nested">
+        <li class="li-data-row list-group-item">
+          <span>New: </span> <span>{{stat.deaths.new}}</span>
+        </li>
+        <li class="li-data-row list-group-item">
+          <span>Total: </span> <span>{{stat.deaths.total}}</span>
+        </li>
+      </ul>
+    </li>
+
+
+  </ul>
+</div>
