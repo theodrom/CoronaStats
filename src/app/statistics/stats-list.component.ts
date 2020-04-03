@@ -11,8 +11,9 @@ import { StatsService } from './stats.service';
 export class CoronaStatsListComponent implements OnInit{
 
     corStats: IStat;
-    countryResp: IResponse[];
     error: string;
+    filteredCorStatsResponse: IResponse[];
+    date: string;
 
     constructor(private statsService: StatsService) {}
 
@@ -22,12 +23,13 @@ export class CoronaStatsListComponent implements OnInit{
     }
     set countryStats(value: string){
         this._countryFilter = value;
-        this.corStats.response = this.countryStats ? this.filterStatsByCountry(this.countryStats) : this.corStats.response;
+        this.filteredCorStatsResponse = this.countryStats ? this.filterStatsByCountry(this.countryStats) : this.corStats.response;
     }
     filterStatsByCountry(countryFilter: string): IResponse[]{
         countryFilter = countryFilter.toLocaleLowerCase();
-        return this.corStats.response.filter((responseStat: IResponse) =>
-            responseStat.country.toLocaleLowerCase().includes(countryFilter)
+        const responseArr = this.corStats.response;
+        return responseArr.filter((responseStat: IResponse) =>
+        responseStat.country.toLocaleLowerCase().includes(countryFilter)
         );
     }
 
@@ -38,6 +40,8 @@ export class CoronaStatsListComponent implements OnInit{
                 this.corStats.response.sort((a, b) => {
                     return b.cases.total - a.cases.total;
                 });
+                this.date = this.corStats.response[0].day;
+                this.filteredCorStatsResponse = this.corStats.response;
             },
             error: (err: string) => this.error = err,
             complete: () => console.table(this.corStats)
