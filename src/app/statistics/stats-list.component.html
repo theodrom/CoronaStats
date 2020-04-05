@@ -1,51 +1,26 @@
-
 <div class="row-2" *ngIf='corStats'>
   <p>
-    Date: {{ date }} 
+    Date: {{ date }}
   </p>
   <div>
-    Search by country: 
-    <input type="text" [(ngModel)]='countryStats'/>
+    Search by country:
+    <input type="text" [(ngModel)]='countryStats' />
   </div>
   <div *ngIf='filteredCorStatsResponse.length > 0'>
-  <p>
-    Results: {{filteredCorStatsResponse.length}}
-  </p>
-    <ul class="card list-group list-group-flush ul-wrapper"  *ngFor='let stat of filteredCorStatsResponse'>
-
+    <p>
+      Results: {{filteredCorStatsResponse.length}}
+    </p>
+    <ul class="card list-group list-group-flush ul-wrapper" *ngFor='let stat of filteredCorStatsResponse'>
       <li class="list-group-item">
-        <h2>{{stat.country}}</h2>
+        <a href="">
+          <h2>{{stat.country}}</h2>
+        </a>
         <ul class="ul-nested">
-  
           <li class="li-data-row list-group-item">
             <span class="font-weight-bold">Total: </span> <span>{{stat.cases.total}}</span>
           </li>
           <li class="li-data-row list-group-item">
-            <span class="font-weight-bold">New: </span> <span>{{stat.cases.new}}</span>
-          </li>
-  
-          <ul class="ul-nested">
-            <li class="li-data-row list-group-item">
-              <span class="font-weight-bold">Active: </span> <span>{{stat.cases.active}}</span>
-            </li>
-            <li class="li-data-row list-group-item">
-              <span class="font-weight-bold">Critical: </span> <span>{{stat.cases.critical}}</span>
-            </li>
-            <li class="li-data-row list-group-item">
-              <span class="font-weight-bold">Recovered: </span> <span>{{stat.cases.recovered}}</span>
-            </li>
-          </ul>
-  
-        </ul>
-      </li>
-      <li class="list-group-item">
-        <h5>Deaths</h5>
-        <ul class="ul-nested">
-          <li class="li-data-row list-group-item">
-            <span class="font-weight-bold">New: </span> <span>{{stat.deaths.new}}</span>
-          </li>
-          <li class="li-data-row list-group-item">
-            <span class="font-weight-bold">Total: </span> <span>{{stat.deaths.total}}</span>
+            <span class="font-weight-bold">Deaths: </span> <span>{{stat.deaths.total}}</span>
           </li>
         </ul>
       </li>
