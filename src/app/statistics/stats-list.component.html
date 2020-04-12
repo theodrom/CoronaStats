@@ -12,7 +12,7 @@
     </p>
     <ul class="card list-group list-group-flush ul-wrapper" *ngFor='let stat of filteredCorStatsResponse'>
       <li class="list-group-item">
-        <a href="">
+        <a routerLinkActive='active' [routerLink]="['/statistics', stat.country | lowercase ]">
           <h2>{{stat.country}}</h2>
         </a>
         <ul class="ul-nested">
