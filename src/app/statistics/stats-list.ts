@@ -12,12 +12,17 @@ export interface IDeaths {
     total: number;
 }
 
+export interface ITests {
+    total: string;
+}
+
 export interface IResponse {
     country: string;
     cases: ICases;
     deaths: IDeaths;
     day: string;
     time: Date;
+    tests: ITests;
 }
 
 export interface IStat {
