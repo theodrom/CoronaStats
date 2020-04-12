@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IStat } from './stats-list';
+import { IStat, IResponse } from './stats-list';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
@@ -22,17 +22,17 @@ export class StatsService{
     };
     countriesURL = 'https://covid-193.p.rapidapi.com/statistics';
 
-    getAllCountryStats(): Observable<IStat> {
-        return this.http.get<IStat>(this.countriesURL, this.httpOptions).pipe(
+    getAllCountryStats(): Observable<any> {
+        return this.http.get<any>(this.countriesURL, this.httpOptions).pipe(
             catchError(this.handleError)
         );
     }
 
-    getStatsByCountryName(country: string): Observable<IStat> {
+    getStatsByCountryName(country: string): Observable<any> {
     //   const params = new HttpParams()
     //         .set('country', country);
       this.httpOptions.params.append('country', country);
-      return this.http.get<IStat>(this.countriesURL, this.httpOptions).pipe(
+      return this.http.get<any>(`${this.countriesURL}?country=${country}`, this.httpOptions).pipe(
             catchError(this.handleError)
         );
     }
