@@ -1,27 +1,26 @@
-<div>
-  <ul class="card list-group list-group-flush ul-wrapper">
+<div *ngIf='countryData'>
+  <ul class="card list-group list-group-flush ul-wrapper"
+  *ngFor='let response of countryData.response'>
     <li class="list-group-item">
-      <h2></h2>
+      <h2>{{ response.country }} - detailed statistics</h2>
       <ul class="ul-nested">
 
         <li class="li-data-row list-group-item">
-          <span class="font-weight-bold">Total: </span> <span></span>
+          <span class="font-weight-bold">Total: </span> <span>{{ response.cases.total }}</span>
         </li>
         <li class="li-data-row list-group-item">
-          <span class="font-weight-bold">New: </span> <span></span>
+          <span class="font-weight-bold">New: </span> <span>{{ response.cases.new }}</span>
         </li>
 
-        <ul class="ul-nested">
           <li class="li-data-row list-group-item">
-            <span class="font-weight-bold">Active: </span> <span></span>
+            <span class="font-weight-bold">Active: </span> <span>{{ response.cases.active }}</span>
           </li>
           <li class="li-data-row list-group-item">
-            <span class="font-weight-bold">Critical: </span> <span></span>
+            <span class="font-weight-bold">Critical: </span> <span>{{ response.cases.critical }}</span>
           </li>
           <li class="li-data-row list-group-item">
-            <span class="font-weight-bold">Recovered: </span> <span></span>
+            <span class="font-weight-bold">Recovered: </span> <span>{{ response.cases.recovered }}</span>
           </li>
-        </ul>
 
       </ul>
     </li>
@@ -29,12 +28,27 @@
       <h5>Deaths</h5>
       <ul class="ul-nested">
         <li class="li-data-row list-group-item">
-          <span class="font-weight-bold">New: </span> <span></span>
+          <span class="font-weight-bold">New: </span> <span>{{ response.deaths.new }}</span>
         </li>
         <li class="li-data-row list-group-item">
-          <span class="font-weight-bold">Total: </span> <span></span>
+          <span class="font-weight-bold">Total: </span> <span>{{ response.deaths.total }}</span>
+        </li>
+      </ul>
+    </li>
+    <li class="list-group-item">
+      <h5>Tests</h5>
+      <ul class="ul-nested">
+        <li class="li-data-row list-group-item">
+          <span class="font-weight-bold">Total: </span> <span>{{ response.tests.total }}</span>
         </li>
       </ul>
     </li>
   </ul>
 </div>
+<div class='card-footer'>
+  <button class='btn btn-outline-secondary'
+         (click)='onBack()'
+         style='width:80px'>
+   <i class='fa fa-chevron-left'></i> Back
+  </button>
+  </div>
