@@ -10,10 +10,12 @@ import { StatsService } from './stats.service';
 
 export class CoronaStatsListComponent implements OnInit{
 
-    corStats: IStat;
+    allCoronaStats: IStat;
     error: string;
-    filteredCorStatsResponse: IResponse[];
+    filteredCoronaStatsResponse: IResponse[];
     date: string;
+    onlyCountriesStats: IStat;
+    notCountries = ['North-America', 'South-America', 'Europe', 'Africa', 'Asia', 'Oceania', 'All'];
 
     constructor(private statsService: StatsService) {}
 
@@ -23,28 +25,47 @@ export class CoronaStatsListComponent implements OnInit{
     }
     set countryStats(value: string){
         this._countryFilter = value;
-        this.filteredCorStatsResponse = this.countryStats ? this.filterStatsByCountry(this.countryStats) : this.corStats.response;
+        this.filteredCoronaStatsResponse = this.countryStats ? this.filterStatsByCountry(this.countryStats) : this.allCoronaStats.response;
     }
     filterStatsByCountry(countryFilter: string): IResponse[]{
         countryFilter = countryFilter.toLocaleLowerCase();
-        const responseArr = this.corStats.response;
+        const responseArr = this.allCoronaStats.response;
         return responseArr.filter((responseStat: IResponse) =>
         responseStat.country.toLocaleLowerCase().includes(countryFilter)
         );
     }
 
+    filterOnlyCountryStats(allStats: IStat): IStat{
+        const responseArr = this.allCoronaStats.response;
+            for(let i = 0; i < this.notCountries.length; i++){
+                var index = responseArr.findIndex((responeValue) => {
+                    return responeValue.country === this.notCountries[i];
+               })
+               if (index !== -1) responseArr.splice(index, 1);
+            }
+        this.onlyCountriesStats = this.allCoronaStats;
+        this.onlyCountriesStats.response = responseArr;
+        console.log()
+        return this.onlyCountriesStats;
+    }
+
+    sortStats(iStat: IStat): any{
+        iStat.response.sort((a, b) => {
+            return b.cases.total - a.cases.total; 
+            });
+    }
+
     ngOnInit(): void {
         this.statsService.getAllCountryStats().subscribe({
             next: data => {
-                this.corStats = data;
-                this.corStats.response.sort((a, b) => {
-                    return b.cases.total - a.cases.total;
-                });
-                this.date = this.corStats.response[0].day;
-                this.filteredCorStatsResponse = this.corStats.response;
+                this.allCoronaStats = data;
+                this.sortStats(this.allCoronaStats);
+                this.date = this.allCoronaStats.response[0].day;
+                this.filterOnlyCountryStats(this.allCoronaStats);
+                this.filteredCoronaStatsResponse = this.onlyCountriesStats.response;
             },
             error: (err: string) => this.error = err,
-            complete: () => console.table(this.corStats)
+            complete: () => console.table(this.allCoronaStats)
         });
     }
 }
