@@ -13,6 +13,7 @@ export class CoronaStatsListComponent implements OnInit {
   filteredCoronaStatsResponse: IResponse[];
   date: string;
   onlyCountriesStats: IStat;
+  continents: string[];
   notCountries = [
     'North-America',
     'South-America',

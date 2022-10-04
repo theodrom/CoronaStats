@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,14 +21,15 @@ import { CountryStatsComponent } from './statistics/country-stats.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     RouterModule.forRoot([
       {path: 'statistics', component: CoronaStatsListComponent},
       {path: 'statistics/:country', component: CountryStatsComponent},
       {path: '', redirectTo: 'statistics', pathMatch: 'full'},
-      {path: '**', redirectTo: 'statistics', pathMatch: 'full'} 
+      {path: '**', redirectTo: 'statistics', pathMatch: 'full'}
     ])
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }                                                                                                                                                                                                                                                                                                                                                                                                                              
+export class AppModule { }

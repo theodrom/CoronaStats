@@ -6,11 +6,22 @@
     Search by country:
     <input type="text" [(ngModel)]='countryStats' />
   </div>
+  <div *ngIf="">
+    Filter:
+    <div class="col">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Continent</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem>Action - 1</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div *ngIf='filteredCoronaStatsResponse.length > 0'>
     <p>
       Results: {{filteredCoronaStatsResponse.length}}
     </p>
-    <ul class="card list-group list-group-flush ul-wrapper" *ngFor='let stat of filteredCoronaStatsResponse'>
+    <ul class="card list-group list-group-flush ul-wrapper" *ngFor='let stat of filteredCoronaStatsResponse; index: 10;'>
       <li class="list-group-item">
         <a routerLinkActive='active' [routerLink]="['/statistics', stat.country | lowercase ]">
           <h2>{{stat.country}}</h2>

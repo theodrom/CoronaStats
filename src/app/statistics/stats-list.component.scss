@@ -5,6 +5,11 @@ $deaths_clr: lightgray;
     width: 30rem; 
     display:inline-flex;
     margin: 10px;
+    background-color: rgba(225, 50, 65, 0.6);
+
+    .list-group-item{
+        background-color: transparent;
+    }
 
     .ul-nested{
         padding: 0;
